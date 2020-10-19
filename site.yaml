@@ -1,0 +1,71 @@
+---
+#Please change the relative directories according to your file locations. 
+- name: Assignment2
+  
+  hosts: webservers
+  become: true
+  
+  tasks:
+  - name: Create a directory if it does not exist
+    file:
+     path: /home/A1/site
+     state: directory
+     mode: '0755'
+
+  - name: Copy file with owner and permissions
+    copy: 
+     src: /home/vita19/chocolate/index.php
+     dest: /var/www/html/index.php
+     #Installing all the packages   
+   
+  - name: Remove the Apache package
+    yum:
+     name: httpd
+     state: absent
+      
+#Installing more and more
+  - name: Installing the packages
+    become: true
+    apt:
+      name: nginx
+      state: present
+  
+  - name: Installing the packages
+    become: true
+    apt:
+      name: php
+      state: present   
+  
+  - name: Installing the packages
+    become: true
+    apt:
+      name: php7.4-fpm
+      state: present   
+###
+
+###copying the nginx.conf file
+   
+  - name: Copy file with owner and permissions
+    become: yes
+    copy: 
+     src: /home/vita19/chocolate/nginx.conf
+     dest: /etc/nginx/nginx.conf
+    
+
+
+         
+  
+
+     
+- hosts: all
+  gather_facts: y
+
+
+
+
+
+
+
+
+
+
