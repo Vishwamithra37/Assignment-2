@@ -1,6 +1,5 @@
-user www-data;
-http{
-        server{
+
+server{
                 listen 80 default_server;
                 listen [::]:80 default_server;
 
@@ -18,5 +17,3 @@ http{
                 }
 
         }
-}
-events{ }
