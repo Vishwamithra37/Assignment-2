@@ -6,35 +6,7 @@
   become: true
   
   tasks:
-  - name: Update apt cache
-    become: yes
-    apt:
-      update_cache: yes
-      cache_valid_time: 7200
-      
-      
-  - name: Create a directory if it does not exist
-    become: yes
-    file:
-     path: /home/A1/site
-     state: directory
-     mode: '0755'
-     
-  - name: Ansible delete file example -Deleting the nginx.conf file
-    file:
-     path: /etc/nginx/nginx.conf
-     state: absent
-     
-  - name: Copy file with owner and permissions-Adding back the nginx.conf file
-    become: yes
-    copy: 
-     src: ./nginx.conf
-     dest: /etc/nginx/nginx.conf
-     
-   
-   
-#Installing more and more
-  
+    
   - name: UnInstall nginx (state=present is optional)
     apt:
      name: nginx
@@ -53,6 +25,27 @@
               state: started 
     become: yes
   
+  - name: Update apt cache
+    become: yes
+    apt:
+      update_cache: yes
+      cache_valid_time: 7200
+    
+  - name: Ansible delete file example -Deleting the nginx.conf file
+    file:
+     path: /etc/nginx/nginx.conf
+     state: absent
+     
+  - name: Copy file with owner and permissions-Adding back the nginx.conf file
+    become: yes
+    copy: 
+     src: ./nginx.conf
+     dest: /etc/nginx/nginx.conf
+     
+   
+   
+#Installing more and more
+
   - name: Uninstalling PHP httpd  (state=present is optional)
     apt:
      name: php
